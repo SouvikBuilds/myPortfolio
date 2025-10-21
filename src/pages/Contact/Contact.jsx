@@ -62,10 +62,10 @@ const Contact = () => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen pt-40 pb-20 px-4 sm:px-8 md:px-16">
-      <h1 className="text-4xl text-center mx-auto font-semibold">
+      <h1 className="text-4xl text-center mx-auto font-semibold text-white">
         Get in Touch
       </h1>
-      <p className="mt-4 text-[20px] text-[#3a3b3c] text-center max-w-2xl">
+      <p className="mt-4 text-[20px] text-gray-300 text-center max-w-2xl">
         Have a question or want to work together? Drop me a message!
       </p>
 
@@ -78,7 +78,7 @@ const Contact = () => {
                   {detail.icon}
                 </div>
                 <div className="flex flex-col items-start gap-1">
-                  <h1 className="text-blue-600 text-xl font-semibold">
+                  <h1 className="text-white text-xl font-semibold">
                     {detail.title}
                   </h1>
                   <p className="text-blue-400 text-[15px] font-normal break-words">
@@ -91,22 +91,21 @@ const Contact = () => {
           <div className="flex flex-col items-start gap-3 mt-5 w-full">
             <div className="flex items-center gap-2">
               <LocateFixed size={24} className="text-blue-600" />
-              <h1 className="text-2xl font-semibold text-blue-600">
-                Find Me:{" "}
-              </h1>
+              <h1 className="text-2xl font-semibold text-white">Find Me: </h1>
             </div>
             <div className="rounded-lg w-full overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d228.33303939694747!2d86.98108072067726!3d23.699955691279335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1761029370039!5m2!1sen!2sin"
                 className="w-full h-64 sm:h-72 md:h-80 lg:h-[300px]"
                 allowFullScreen=""
+                style={{ border: 0, filter: "invert(100%) grayscale(100%)" }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>
         </div>
-        <div className="bg-white p-5 rounded-lg shadow-md w-full lg:w-1/2">
+        <div className="bg-[#202223] p-5 rounded-lg shadow-md w-full lg:w-1/2">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-center items-stretch gap-5"
@@ -115,7 +114,7 @@ const Contact = () => {
               return (
                 <div key={field.id} className="w-full">
                   <label className="block">
-                    <span className="block mb-1 text-gray-700 font-medium">
+                    <span className="block mb-1 text-white font-medium">
                       {field.label}
                     </span>
                     {field.id === 3 ? (

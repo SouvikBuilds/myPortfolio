@@ -5,34 +5,34 @@ import { useNavigate } from "react-router-dom";
 const About = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-b from-slate-50 to-white pt-20">
+    <div className="flex flex-col justify-center items-center w-full min-h-screen bg-[#202223] to-white pt-20">
       <div className="w-full px-4 sm:px-8 md:px-16 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
               About Me
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-300">
               Get to know me better and discover my journey
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h2 className="text-2xl font-semibold text-white mb-4">
                 Who I Am
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-300 leading-relaxed mb-4">
                 I'm Souvik Chatterjee, a first-year student in the IT Department
                 at Techno Main Saltlake. I'm passionate about web development
                 and creating beautiful, functional digital experiences.
               </p>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-300 leading-relaxed mb-4">
                 With a strong foundation in web technologies, I'm committed to
                 continuous learning and staying updated with the latest trends
                 in the tech industry.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 When I'm not coding, I love exploring new projects, contributing
                 to open source, and connecting with like-minded developers in
                 the community.
@@ -40,17 +40,17 @@ const About = () => {
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              <h2 className="text-2xl font-semibold text-white mb-6">
                 My Focus
               </h2>
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <Code className="text-blue-600 flex-shrink-0" size={24} />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">
+                    <h3 className="font-semibold text-white mb-1">
                       Web Development
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-300 text-sm">
                       Building responsive and interactive web applications
                     </p>
                   </div>
@@ -58,10 +58,10 @@ const About = () => {
                 <div className="flex gap-4">
                   <BookOpen className="text-blue-600 flex-shrink-0" size={24} />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">
+                    <h3 className="font-semibold text-white mb-1">
                       Continuous Learning
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-300 text-sm">
                       Always exploring new technologies and best practices
                     </p>
                   </div>
@@ -69,10 +69,10 @@ const About = () => {
                 <div className="flex gap-4">
                   <Target className="text-blue-600 flex-shrink-0" size={24} />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">
+                    <h3 className="font-semibold text-white mb-1">
                       Problem Solving
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-300 text-sm">
                       Creating elegant solutions to complex challenges
                     </p>
                   </div>
@@ -82,17 +82,17 @@ const About = () => {
           </div>
 
           <div className="mb-16">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            <h2 className="text-2xl font-semibold text-white mb-6">
               Education
             </h2>
-            <div className="bg-white border-l-4 border-blue-600 p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            <div className="bg-black border-l-4 border-blue-600 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-semibold text-gray-300 mb-2">
                 Techno Main Saltlake
               </h3>
               <p className="text-blue-600 font-medium mb-2">
                 IT Department - First Year Student
               </p>
-              <p className="text-gray-600">
+              <p className="text-gray-300">
                 Currently pursuing my studies in Information Technology with
                 focus on web development and software engineering
               </p>

@@ -26,12 +26,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <>
-      <div className="flex flex-row fixed z-50 items-center justify-between bg-white shadow  w-full max-w-full px-5 py-2">
+      <div className="flex flex-row fixed z-50 items-center justify-between  shadow  w-full max-w-full px-5 py-2 bg-[#333] ">
         <div className="logo p-0 m-0">
           <img
             src={logo}
             alt="logo"
-            className="w-[100px] cursor-pointer"
+            className="w-[100px] cursor-pointer invert"
             onClick={() => navigate("/")}
           />
         </div>
@@ -45,7 +45,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                       isActive
                         ? "text-blue-500 cursor-pointer duration-200 text-base font-semibold border-b-2 border-blue-500"
-                        : "text-black text-base hover:text-blue-400 transition-colors"
+                        : "text-white text-base hover:text-blue-400 transition-colors"
                     }
                   >
                     {item.title}

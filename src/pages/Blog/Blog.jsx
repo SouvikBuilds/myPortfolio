@@ -90,20 +90,18 @@ const Blog = () => {
     return matchesSearch && matchesCategory;
   });
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-b from-slate-50 to-white pt-20">
+    <div className="flex flex-col justify-center items-center w-full min-h-screen bg-[#202223] pt-20">
       <div className="w-full px-4 sm:px-8 md:px-16 py-12">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
               Blog
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-300">
               Thoughts, tutorials, and insights about web development
             </p>
           </div>
 
-          {/* Search and Filter */}
           <div className="mb-12">
             <div className="relative mb-6">
               <Search
@@ -115,7 +113,7 @@ const Blog = () => {
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white"
               />
             </div>
 
@@ -127,7 +125,7 @@ const Blog = () => {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
                     selectedCategory === category
                       ? "bg-blue-600 text-white shadow-md"
-                      : "bg-white text-gray-700 border border-gray-300 hover:border-blue-400 hover:text-blue-600"
+                      : "bg-black text-blue-400 border border-gray-300 hover:border-blue-400 hover:text-blue-600 shadow shadow-blue-400"
                   }`}
                 >
                   {category}
@@ -136,13 +134,12 @@ const Blog = () => {
             </div>
           </div>
 
-          {/* Blog Posts Grid */}
           {filteredPosts.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
-                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-blue-200"
+                  className="bg-[#333] rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-blue-200"
                 >
                   <div className="relative overflow-hidden h-48">
                     <img
@@ -160,7 +157,7 @@ const Blog = () => {
 
                   <div className="p-6">
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1 text-blue-400">
                         <Calendar size={14} />
                         {new Date(post.date).toLocaleDateString("en-US", {
                           month: "short",
@@ -168,17 +165,17 @@ const Blog = () => {
                           year: "numeric",
                         })}
                       </span>
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1 text-blue-400">
                         <Clock size={14} />
                         {post.readTime}
                       </span>
                     </div>
 
-                    <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    <h2 className="text-xl font-bold text-blue-400 mb-3 group-hover:text-blue-600 transition-colors duration-300">
                       {post.title}
                     </h2>
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-white text-sm leading-relaxed mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
 
@@ -201,7 +198,6 @@ const Blog = () => {
             </div>
           )}
 
-          {/* Newsletter Section */}
           <div className="mt-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-8 text-center text-white">
             <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
