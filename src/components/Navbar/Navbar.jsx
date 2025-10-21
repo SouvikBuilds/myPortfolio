@@ -56,7 +56,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="hidden md:block">
-          <Button title={"Contact Us"} navigateTo={"/contact"} />
+          <Button title={"Contact Me"} navigateTo={"/contact"} />
         </div>
         <div className="md:hidden">
           <button

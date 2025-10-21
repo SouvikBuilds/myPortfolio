@@ -34,7 +34,7 @@ const Projects = () => {
       description:
         "A simple yet fun Number Guessing Game built using HTML, CSS, and JavaScript, where users guess a number and roll the dice to test their luck — showcasing my creativity and core web development skills.",
       title: "Roll The Dice",
-      link: "https://roll-dice-game-fawn.vercel.app/",
+      link: "https://roll-dice-game-xi.vercel.app/",
     },
 
     {
