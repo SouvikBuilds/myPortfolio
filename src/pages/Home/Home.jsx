@@ -34,7 +34,7 @@ const Home = () => {
             </p>
           </div>
           <div className="flex-1 w-full flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-md shadow-xs shadow-blue-600">
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* <img
                   src={blob}
@@ -57,8 +57,8 @@ const Home = () => {
         <h1 className="text-3xl text-center font-semibold text-white">
           My Projects
         </h1>
-        <div className="w-[1rem] h-[10px] rounded-full bg-purple-700 absolute mt-[33px]"></div>
-        <div className="w-[10rem] h-[5px] rounded-2xl bg-purple-600 relative"></div>
+        <div className="w-[1rem] h-[10px] rounded-full bg-blue-700 absolute mt-[33px]"></div>
+        <div className="w-[10rem] h-[5px] rounded-2xl bg-blue-600 relative"></div>
 
         <Projects />
       </div>
@@ -66,8 +66,8 @@ const Home = () => {
         <h1 className="text-3xl text-center font-semibold text-white">
           My Skills
         </h1>
-        <div className="w-[1rem] h-[10px] rounded-full bg-purple-700 absolute mt-[33px]"></div>
-        <div className="w-[10rem] h-[5px] rounded-2xl bg-purple-600 relative"></div>
+        <div className="w-[1rem] h-[10px] rounded-full bg-blue-700 absolute mt-[33px]"></div>
+        <div className="w-[10rem] h-[5px] rounded-2xl bg-blue-600 relative"></div>
 
         <Skills />
       </div>
