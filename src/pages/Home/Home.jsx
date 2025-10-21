@@ -11,7 +11,7 @@ const Home = () => {
   const imageList = [myImage, Souvik];
 
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-b from-slate-50 to-white lg:pt-20">
+    <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-b from-slate-50 to-white lg:pt-20 md:pt-20">
       <div className="w-full px-4 sm:px-8 md:px-16 py-12 mt-[8rem] md:mt-10 lg:mt-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16 max-w-6xl mx-auto">
           <div className="flex-1 text-center lg:text-left">
