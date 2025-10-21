@@ -6,12 +6,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const { register, handleSubmit, reset } = useForm();
-  const [myData, setMyData] = useState([]);
+  const [myData, setMyData] = useState(() => {
+    const savedData = localStorage.getItem("myData");
+    return savedData ? JSON.parse(savedData) : [];
+  });
 
   const onSubmit = (data) => {
     const updatedData = [...myData, data];
     setMyData(updatedData);
-    toast.success("✅ Message Sent Successfully");
+    localStorage.setItem("myData", JSON.stringify(updatedData));
+    toast.success("Message Sent Successfully");
     reset();
   };
 
