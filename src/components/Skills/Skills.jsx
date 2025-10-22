@@ -1,34 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import hjc from "../../assets/hjc.png";
 import python from "../../assets/python.jpeg";
 import cpp from "../../assets/cpp.png";
 import backend from "../../assets/backend.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
+  const [expandedCards, setExpandedCards] = useState(new Set());
   const skillLists = [
     {
+      id: 1,
       image: hjc,
       description:
-        "I have a strong foundation in HTML, CSS, and JavaScript, enabling me to build fully responsive and interactive web applications. I use HTML to create well-structured and accessible layouts, CSS to design visually appealing and adaptive interfaces with Flexbox, Grid, and animations, and JavaScript to bring functionality and interactivity to life through dynamic elements and seamless user experiences.",
+        "I have a strong foundation in HTML, CSS, and JavaScript, which allows me to craft fully responsive and visually appealing web applications. With HTML, I create well-structured layouts; with CSS, I design adaptive interfaces using Flexbox, Grid, and animations; and with JavaScript, I bring interactivity and seamless user experiences to life.",
     },
     {
+      id: 2,
       image: python,
       description:
-        "Proficient in Python programming, with a solid understanding of data structures, algorithms, and object-oriented concepts. Experienced in building efficient scripts, automation tools, and backend logic for web applications, focusing on clean, readable, and optimized code.",
+        "Proficient in Python programming with a solid grasp of data structures, algorithms, and object-oriented design. I use Python to build automation tools, backend logic, and efficient scripts that focus on clean, optimized, and maintainable code — ensuring reliability and clarity in every project I create or collaborate on.",
     },
     {
+      id: 3,
       image: cpp,
       description:
-        "I have a basic to moderate understanding of C++, including concepts of data structures, algorithms, and object-oriented programming. I use C++ to strengthen my problem-solving skills and enhance my understanding of core programming logic and efficiency.",
+        "I possess a foundational to intermediate understanding of C++, covering data structures, algorithms, and object-oriented principles. I use C++ to strengthen my logical thinking and enhance problem-solving efficiency while developing a deeper grasp of performance-oriented programming concepts and code optimization.",
     },
     {
+      id: 4,
       image: backend,
       description:
-        "Experienced in Python and its frameworks Django and FastAPI, with a growing proficiency in building backend systems and working with MongoDB for efficient data management. I have hands-on experience in creating schemas, designing models, and implementing basic authentication. Currently, I'm enhancing my skills further to build more secure and scalable backend architectures.",
+        "Skilled in Python and its frameworks Django and FastAPI, with hands-on experience in MongoDB for data management. I can design schemas, create models, and implement secure authentication systems. Currently, I’m expanding my backend skills to develop more robust, scalable, and efficient architectures for real-world web applications.",
     },
   ];
 
@@ -53,10 +59,24 @@ const Skills = () => {
     );
   }, []);
 
+  const handleMore = (cardId) => {
+    setExpandedCards((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <div className="flex flex-col justify-center items-center py-8 px-4 sm:px-6 lg:px-10">
       <div className="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-5 lg:gap-6 mt-3">
         {skillLists.map((card, index) => {
+          const isExpanded = expandedCards.has(card.id);
+
           return (
             <div
               className="skill-card card flex flex-col justify-center items-center gap-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-slate-500 group h-full"
@@ -71,9 +91,25 @@ const Skills = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
-              <p className="text-sm sm:text-[15px] text-justify text-slate-400 group-hover:text-slate-300 transition-colors duration-300 line-clamp-4">
-                {card.description}
+              <p className="text-sm sm:text-[15px] text-justify text-slate-400 group-hover:text-slate-300 transition-colors duration-300 ">
+                {isExpanded
+                  ? card.description
+                  : card.description.slice(0, 100).concat("...")}
               </p>
+              <div className="mt-2">
+                <p
+                  className="text-blue-500 active:text-blue-700 cursor-pointer flex items-center justify-center gap-2"
+                  onClick={() => handleMore(card.id)}
+                >
+                  {isExpanded ? "Show Less" : "Show More"}{" "}
+                  <span>
+                    <ArrowRight
+                      size={20}
+                      className="text-blue-500 animate-pulse"
+                    />
+                  </span>
+                </p>
+              </div>
             </div>
           );
         })}

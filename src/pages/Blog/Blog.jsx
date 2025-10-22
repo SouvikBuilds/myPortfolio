@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [expandedCards, setExpandedCards] = useState(new Set());
   const titleRef = useRef(null);
   const searchRef = useRef(null);
   const categoriesRef = useRef(null);
@@ -17,7 +18,7 @@ const Blog = () => {
       id: 1,
       title: "Building Responsive Web Applications with React",
       excerpt:
-        "Learn the best practices for creating fully responsive web applications using React and Tailwind CSS. Discover techniques for mobile-first design and adaptive layouts.",
+        "Discover how to build fully responsive and visually appealing web applications using React and Tailwind CSS. Learn practical techniques for mobile-first design, reusable components, and adaptive layouts that ensure a seamless experience across all devices.",
       date: "2025-03-15",
       readTime: "5 min read",
       category: "React",
@@ -28,7 +29,7 @@ const Blog = () => {
       id: 2,
       title: "Understanding JavaScript Closures and Scope",
       excerpt:
-        "Dive deep into JavaScript closures and scope chain. Master these fundamental concepts to write better, more efficient JavaScript code.",
+        "Uncover the core concepts of JavaScript closures and the scope chain with clear, real-world examples. This guide helps you master one of JavaScript's most powerful features, improving your ability to write cleaner, modular, and high-performance code.",
       date: "2025-03-10",
       readTime: "7 min read",
       category: "JavaScript",
@@ -39,7 +40,7 @@ const Blog = () => {
       id: 3,
       title: "Getting Started with FastAPI and MongoDB",
       excerpt:
-        "A comprehensive guide to building RESTful APIs with FastAPI and MongoDB. Learn how to set up authentication and create efficient database schemas.",
+        "A hands-on introduction to building RESTful APIs using FastAPI and MongoDB. Learn to set up routes, manage databases efficiently, implement authentication, and follow clean architectural patterns for high-performance backend development.",
       date: "2025-03-05",
       readTime: "10 min read",
       category: "Backend",
@@ -50,7 +51,7 @@ const Blog = () => {
       id: 4,
       title: "CSS Grid vs Flexbox: When to Use What",
       excerpt:
-        "Explore the differences between CSS Grid and Flexbox. Learn when to use each layout system for optimal web design results.",
+        "A detailed comparison between CSS Grid and Flexbox to help you choose the right layout system for your project. Understand their core principles, ideal use-cases, and how to combine them for creating powerful and responsive web layouts.",
       date: "2025-02-28",
       readTime: "6 min read",
       category: "CSS",
@@ -61,7 +62,7 @@ const Blog = () => {
       id: 5,
       title: "Python Best Practices for Clean Code",
       excerpt:
-        "Discover Python coding standards and best practices. Write cleaner, more maintainable code following PEP 8 guidelines and modern conventions.",
+        "Learn the essential Python best practices to write clean, readable, and maintainable code. This guide covers PEP 8 standards, modular programming, naming conventions, and techniques to enhance efficiency in modern Python projects.",
       date: "2025-02-20",
       readTime: "8 min read",
       category: "Python",
@@ -72,7 +73,7 @@ const Blog = () => {
       id: 6,
       title: "Modern Web Development Workflow in 2025",
       excerpt:
-        "Explore the latest tools and workflows for modern web development. From version control to deployment, streamline your development process.",
+        "Explore the latest tools, frameworks, and workflows shaping web development in 2025. From Git version control and CI/CD pipelines to modern deployment strategies, learn how to streamline your process for faster, more efficient delivery.",
       date: "2025-02-15",
       readTime: "9 min read",
       category: "Web Development",
@@ -137,6 +138,18 @@ const Blog = () => {
     );
   }, [filteredPosts]);
 
+  const handleMore = (postId) => {
+    setExpandedCards((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(postId)) {
+        newSet.delete(postId);
+      } else {
+        newSet.add(postId);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen bg-[#202223] pt-20">
       <div className="w-full px-4 sm:px-8 md:px-16 py-12">
@@ -187,59 +200,68 @@ const Blog = () => {
 
           {filteredPosts.length > 0 ? (
             <div className="blog-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="blog-card bg-[#333] rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-blue-200"
-                >
-                  <div className="relative overflow-hidden h-48">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4">
-                      <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                        <Tag size={12} />
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
+              {filteredPosts.map((post) => {
+                const isExpanded = expandedCards.has(post.id);
 
-                  <div className="p-6">
-                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                      <span className="flex items-center gap-1 text-blue-400">
-                        <Calendar size={14} />
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </span>
-                      <span className="flex items-center gap-1 text-blue-400">
-                        <Clock size={14} />
-                        {post.readTime}
-                      </span>
-                    </div>
-
-                    <h2 className="text-xl font-bold text-blue-400 mb-3 group-hover:text-blue-600 transition-colors duration-300">
-                      {post.title}
-                    </h2>
-
-                    <p className="text-white text-sm leading-relaxed mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex items-center text-blue-600 font-medium text-sm group-hover:gap-2 transition-all duration-300">
-                      Read More
-                      <ArrowRight
-                        size={16}
-                        className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                return (
+                  <article
+                    key={post.id}
+                    className="blog-card bg-[#333] rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100 hover:border-blue-200"
+                  >
+                    <div className="relative overflow-hidden h-48">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
+                      <div className="absolute top-4 right-4">
+                        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                          <Tag size={12} />
+                          {post.category}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+
+                    <div className="p-6">
+                      <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                        <span className="flex items-center gap-1 text-blue-400">
+                          <Calendar size={14} />
+                          {new Date(post.date).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </span>
+                        <span className="flex items-center gap-1 text-blue-400">
+                          <Clock size={14} />
+                          {post.readTime}
+                        </span>
+                      </div>
+
+                      <h2 className="text-xl font-bold text-blue-400 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                        {post.title}
+                      </h2>
+
+                      <p className="text-white text-sm leading-relaxed mb-4">
+                        {isExpanded
+                          ? post.excerpt
+                          : post.excerpt.slice(0, 100) + "..."}
+                      </p>
+
+                      <div
+                        onClick={() => handleMore(post.id)}
+                        className="flex items-center text-blue-600 font-medium text-sm group-hover:gap-2 transition-all duration-300 cursor-pointer"
+                      >
+                        {isExpanded ? "Show Less" : "Show More"}
+                        <ArrowRight
+                          size={16}
+                          className="ml-1 group-hover:translate-x-1 transition-transform duration-300 animate-pulse"
+                        />
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-16">
