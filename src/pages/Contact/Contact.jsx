@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Mail, User, LocateFixed, Send, UserPen } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { gsap } from "gsap";
 
 const Contact = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -10,6 +11,11 @@ const Contact = () => {
     const savedData = localStorage.getItem("myData");
     return savedData ? JSON.parse(savedData) : [];
   });
+
+  const titleRef = useRef(null);
+  const detailsRef = useRef(null);
+  const formRef = useRef(null);
+  const mapRef = useRef(null);
 
   const onSubmit = (data) => {
     const updatedData = [...myData, data];
@@ -60,17 +66,55 @@ const Contact = () => {
     },
   ];
 
+  useEffect(() => {
+    gsap.fromTo(
+      titleRef.current,
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+
+    gsap.fromTo(
+      detailsRef.current.children,
+      { x: -50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.2,
+        delay: 0.3,
+        ease: "power3.out",
+      }
+    );
+
+    gsap.fromTo(
+      formRef.current,
+      { x: 50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.8, delay: 0.5, ease: "power3.out" }
+    );
+
+    gsap.fromTo(
+      mapRef.current,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 0.8, ease: "power3.out" }
+    );
+  }, []);
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen pt-40 pb-20 px-4 sm:px-8 md:px-16">
-      <h1 className="text-4xl text-center mx-auto font-semibold text-white">
-        Get in Touch
-      </h1>
-      <p className="mt-4 text-[20px] text-gray-300 text-center max-w-2xl">
-        Have a question or want to work together? Drop me a message!
-      </p>
+      <div ref={titleRef}>
+        <h1 className="text-4xl text-center mx-auto font-semibold text-white">
+          Get in Touch
+        </h1>
+        <p className="mt-4 text-[20px] text-gray-300 text-center max-w-2xl">
+          Have a question or want to work together? Drop me a message!
+        </p>
+      </div>
 
       <div className="mt-10 flex flex-col lg:flex-row items-start justify-center gap-8 w-full max-w-6xl">
-        <div className="flex flex-col items-start gap-4 p-5 w-full lg:w-1/2">
+        <div
+          ref={detailsRef}
+          className="flex flex-col items-start gap-4 p-5 w-full lg:w-1/2"
+        >
           {myDetails.map((detail, index) => {
             return (
               <div key={index} className="flex flex-row items-center gap-2">
@@ -88,7 +132,10 @@ const Contact = () => {
               </div>
             );
           })}
-          <div className="flex flex-col items-start gap-3 mt-5 w-full">
+          <div
+            ref={mapRef}
+            className="flex flex-col items-start gap-3 mt-5 w-full"
+          >
             <div className="flex items-center gap-2">
               <LocateFixed size={24} className="text-blue-600" />
               <h1 className="text-2xl font-semibold text-white">Find Me: </h1>
@@ -105,7 +152,10 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#202223] p-5 rounded-lg shadow-md w-full lg:w-1/2">
+        <div
+          ref={formRef}
+          className="bg-[#202223] p-5 rounded-lg shadow-md w-full lg:w-1/2"
+        >
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-center items-stretch gap-5"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import netflix from "../../assets/netflix.png";
 import weather from "../../assets/weather.png";
 import Button from "../Button/Button";
@@ -8,6 +8,10 @@ import whackMole from "../../assets/whackMole.png";
 import cryptoDashboard from "../../assets/cryptoDashboard.png";
 import { NavLink } from "react-router-dom";
 import { MoveRight } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
   const cardLists = [
@@ -46,12 +50,34 @@ const Projects = () => {
       link: "https://crypto-dashboard-template-with-reac.vercel.app/",
     },
   ];
+
+  useEffect(() => {
+    gsap.fromTo(
+      ".project-card",
+      { y: 80, opacity: 0, scale: 0.9 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".projects-grid",
+          start: "top 85%",
+          end: "bottom 60%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, []);
+
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-5 lg:gap-6">
+      <div className="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-5 lg:gap-6">
         {cardLists.map((card) => (
           <div
-            className="card flex flex-col justify-center items-center gap-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-slate-500 group h-full"
+            className="project-card card flex flex-col justify-center items-center gap-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-slate-500 group h-full"
             key={card.id}
           >
             <div className="relative overflow-hidden rounded-xl w-full h-40 sm:h-48">

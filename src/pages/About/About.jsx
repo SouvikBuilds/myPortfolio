@@ -1,14 +1,92 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Code, BookOpen, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
   const navigate = useNavigate();
+  const titleRef = useRef(null);
+  const whoIAmRef = useRef(null);
+  const myFocusRef = useRef(null);
+  const educationRef = useRef(null);
+  const ctaRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      titleRef.current,
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+
+    gsap.fromTo(
+      whoIAmRef.current,
+      { x: -100, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: whoIAmRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      myFocusRef.current,
+      { x: 100, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: myFocusRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      educationRef.current,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: educationRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ctaRef.current,
+      { scale: 0.8, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, []);
+
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen bg-[#202223] to-white pt-20">
       <div className="w-full px-4 sm:px-8 md:px-16 py-12">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <div ref={titleRef} className="text-center mb-12">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
               About Me
             </h1>
@@ -18,7 +96,7 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
+            <div ref={whoIAmRef}>
               <h2 className="text-2xl font-semibold text-white mb-4">
                 Who I Am
               </h2>
@@ -39,7 +117,7 @@ const About = () => {
               </p>
             </div>
 
-            <div>
+            <div ref={myFocusRef}>
               <h2 className="text-2xl font-semibold text-white mb-6">
                 My Focus
               </h2>
@@ -81,7 +159,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="mb-16">
+          <div ref={educationRef} className="mb-16">
             <h2 className="text-2xl font-semibold text-white mb-6">
               Education
             </h2>
@@ -99,7 +177,10 @@ const About = () => {
             </div>
           </div>
 
-          <div className="text-center bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-8 text-white">
+          <div
+            ref={ctaRef}
+            className="text-center bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-8 text-white"
+          >
             <h2 className="text-2xl font-semibold mb-4">Let's Work Together</h2>
             <p className="mb-6 text-blue-100">
               I'm always interested in hearing about new projects and

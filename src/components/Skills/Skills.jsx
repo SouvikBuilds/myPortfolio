@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import hjc from "../../assets/hjc.png";
 import python from "../../assets/python.jpeg";
 import cpp from "../../assets/cpp.png";
 import backend from "../../assets/backend.png";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
   const skillLists = [
@@ -24,17 +28,39 @@ const Skills = () => {
     {
       image: backend,
       description:
-        "Experienced in Python and its frameworks Django and FastAPI, with a growing proficiency in building backend systems and working with MongoDB for efficient data management. I have hands-on experience in creating schemas, designing models, and implementing basic authentication. Currently, I’m enhancing my skills further to build more secure and scalable backend architectures.",
+        "Experienced in Python and its frameworks Django and FastAPI, with a growing proficiency in building backend systems and working with MongoDB for efficient data management. I have hands-on experience in creating schemas, designing models, and implementing basic authentication. Currently, I'm enhancing my skills further to build more secure and scalable backend architectures.",
     },
   ];
+
+  useEffect(() => {
+    gsap.fromTo(
+      ".skill-card",
+      { y: 80, opacity: 0, scale: 0.9 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".skills-grid",
+          start: "top 85%",
+          end: "bottom 60%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, []);
+
   return (
     <div className="flex flex-col justify-center items-center py-8 px-4 sm:px-6 lg:px-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-5 lg:gap-6 mt-3">
-        {skillLists.map((card) => {
+      <div className="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-5 lg:gap-6 mt-3">
+        {skillLists.map((card, index) => {
           return (
             <div
-              className="card flex flex-col justify-center items-center gap-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-slate-500 group h-full"
-              key={card.description}
+              className="skill-card card flex flex-col justify-center items-center gap-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-slate-500 group h-full"
+              key={index}
             >
               <div className="relative overflow-hidden rounded-xl w-full h-40 sm:h-48">
                 <img

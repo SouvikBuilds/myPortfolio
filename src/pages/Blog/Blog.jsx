@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Calendar, Clock, ArrowRight, Search, Tag } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const titleRef = useRef(null);
+  const searchRef = useRef(null);
+  const categoriesRef = useRef(null);
+
   const blogPosts = [
     {
       id: 1,
@@ -81,6 +90,7 @@ const Blog = () => {
     "Python",
     "Web Development",
   ];
+
   const filteredPosts = blogPosts.filter((post) => {
     const matchesSearch =
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -89,11 +99,49 @@ const Blog = () => {
       selectedCategory === "All" || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  useEffect(() => {
+    gsap.fromTo(
+      titleRef.current,
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+
+    gsap.fromTo(
+      searchRef.current,
+      { x: -50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.8, delay: 0.3, ease: "power3.out" }
+    );
+
+    gsap.fromTo(
+      categoriesRef.current,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 0.5, ease: "power3.out" }
+    );
+
+    gsap.fromTo(
+      ".blog-card",
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".blog-grid",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  }, [filteredPosts]);
+
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen bg-[#202223] pt-20">
       <div className="w-full px-4 sm:px-8 md:px-16 py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <div ref={titleRef} className="text-center mb-12">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
               Blog
             </h1>
@@ -103,7 +151,7 @@ const Blog = () => {
           </div>
 
           <div className="mb-12">
-            <div className="relative mb-6">
+            <div ref={searchRef} className="relative mb-6">
               <Search
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
                 size={20}
@@ -117,7 +165,10 @@ const Blog = () => {
               />
             </div>
 
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div
+              ref={categoriesRef}
+              className="flex flex-wrap gap-3 justify-center"
+            >
               {categories.map((category) => (
                 <button
                   key={category}
@@ -135,11 +186,11 @@ const Blog = () => {
           </div>
 
           {filteredPosts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="blog-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
-                  className="bg-[#333] rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-blue-200"
+                  className="blog-card bg-[#333] rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-blue-200"
                 >
                   <div className="relative overflow-hidden h-48">
                     <img
