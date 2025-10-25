@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,13 +120,27 @@ const Projects = () => {
                   className="text-blue-500 active:text-blue-700 cursor-pointer flex items-center justify-center gap-2"
                   onClick={() => handleMore(card.id)}
                 >
-                  {isExpanded ? "Show Less" : "Show More"}{" "}
-                  <span>
-                    <ArrowRight
-                      size={20}
-                      className="text-blue-500 animate-pulse"
-                    />
-                  </span>
+                  {isExpanded ? (
+                    <>
+                      Show Less
+                      <span>
+                        <ArrowUp
+                          size={20}
+                          className="text-blue-500 animate-pulse"
+                        />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      Show More
+                      <span>
+                        <ArrowDown
+                          size={20}
+                          className="text-blue-500 animate-pulse"
+                        />
+                      </span>
+                    </>
+                  )}{" "}
                 </p>
               </div>
 

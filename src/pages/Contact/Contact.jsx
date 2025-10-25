@@ -34,7 +34,7 @@ const Contact = () => {
     {
       icon: <Mail />,
       title: "Email id",
-      description: "souvikchatterjee@example.com",
+      description: "csouvik2006@gmail.com",
     },
     {
       icon: <User />,
@@ -154,11 +154,11 @@ const Contact = () => {
         </div>
         <div
           ref={formRef}
-          className="bg-[#202223] p-5 rounded-lg shadow-md w-full lg:w-1/2"
+          className="bg-[#202223] p-5 rounded-lg shadow-md w-full lg:w-1/2  shadow-blue-400"
         >
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col justify-center items-stretch gap-5"
+            className="flex flex-col justify-center items-stretch gap-5 "
           >
             {formFields.map((field) => {
               return (

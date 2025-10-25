@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import hjc from "../../assets/hjc.png";
 import python from "../../assets/python.jpeg";
+import react from "../../assets/react.png";
 import cpp from "../../assets/cpp.png";
 import backend from "../../assets/backend.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowUp, ArrowDown } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,17 +25,18 @@ const Skills = () => {
       description:
         "Proficient in Python programming with a solid grasp of data structures, algorithms, and object-oriented design. I use Python to build automation tools, backend logic, and efficient scripts that focus on clean, optimized, and maintainable code — ensuring reliability and clarity in every project I create or collaborate on.",
     },
+
     {
       id: 3,
-      image: cpp,
-      description:
-        "I possess a foundational to intermediate understanding of C++, covering data structures, algorithms, and object-oriented principles. I use C++ to strengthen my logical thinking and enhance problem-solving efficiency while developing a deeper grasp of performance-oriented programming concepts and code optimization.",
-    },
-    {
-      id: 4,
       image: backend,
       description:
         "Skilled in Python and its frameworks Django and FastAPI, with hands-on experience in MongoDB for data management. I can design schemas, create models, and implement secure authentication systems. Currently, I’m expanding my backend skills to develop more robust, scalable, and efficient architectures for real-world web applications.",
+    },
+    {
+      id: 4,
+      image: react,
+      description:
+        "Proficient in building dynamic, responsive, and high-performance interfaces using React.js. I create reusable components, manage state efficiently with hooks and context, and integrate APIs for smooth data flow. I focus on scalability, clean architecture, and delivering seamless user experiences across all devices.",
     },
   ];
 
@@ -101,13 +103,27 @@ const Skills = () => {
                   className="text-blue-500 active:text-blue-700 cursor-pointer flex items-center justify-center gap-2"
                   onClick={() => handleMore(card.id)}
                 >
-                  {isExpanded ? "Show Less" : "Show More"}{" "}
-                  <span>
-                    <ArrowRight
-                      size={20}
-                      className="text-blue-500 animate-pulse"
-                    />
-                  </span>
+                  {isExpanded ? (
+                    <>
+                      Show Less
+                      <span>
+                        <ArrowUp
+                          size={20}
+                          className="text-blue-500 animate-pulse "
+                        />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      Show More
+                      <span>
+                        <ArrowDown
+                          size={20}
+                          className="text-blue-500 animate-pulse "
+                        />
+                      </span>
+                    </>
+                  )}{" "}
                 </p>
               </div>
             </div>

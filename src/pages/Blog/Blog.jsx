@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Calendar, Clock, ArrowRight, Search, Tag } from "lucide-react";
+import { Calendar, Clock, ArrowUp, ArrowDown, Search, Tag } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -252,11 +252,27 @@ const Blog = () => {
                         onClick={() => handleMore(post.id)}
                         className="flex items-center text-blue-600 font-medium text-sm group-hover:gap-2 transition-all duration-300 cursor-pointer"
                       >
-                        {isExpanded ? "Show Less" : "Show More"}
-                        <ArrowRight
-                          size={16}
-                          className="ml-1 group-hover:translate-x-1 transition-transform duration-300 animate-pulse"
-                        />
+                        {isExpanded ? (
+                          <>
+                            Show Less
+                            <span>
+                              <ArrowUp
+                                size={20}
+                                className="text-blue-500 animate-pulse"
+                              />
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            Show More
+                            <span>
+                              <ArrowDown
+                                size={20}
+                                className="text-blue-500 animate-pulse"
+                              />
+                            </span>
+                          </>
+                        )}{" "}
                       </div>
                     </div>
                   </article>
