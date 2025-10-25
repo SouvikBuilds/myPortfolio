@@ -5,6 +5,8 @@ import Projects from "../../components/Projects/Projects.jsx";
 import Skills from "../../components/Skills/Skills.jsx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,8 +103,9 @@ const Home = () => {
             <div className="relative w-full max-w-md shadow-xs shadow-blue-600">
               <div className="absolute inset-0 flex items-center justify-center"></div>
               <div className="relative aspect-square flex items-center justify-center p-8 sm:p-12 bg-[#202223]">
-                <img
+                <LazyLoadImage
                   src={image}
+                  effect="blur"
                   alt="profile"
                   className="w-[100%] h-auto object-contain drop-shadow-xl transition-opacity duration-300"
                 />

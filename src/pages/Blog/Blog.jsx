@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Calendar, Clock, ArrowUp, ArrowDown, Search, Tag } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -209,9 +211,10 @@ const Blog = () => {
                     className="blog-card bg-[#333] rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100 hover:border-blue-200"
                   >
                     <div className="relative overflow-hidden h-48">
-                      <img
+                      <LazyLoadImage
                         src={post.image}
                         alt={post.title}
+                        effect="blur"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                       <div className="absolute top-4 right-4">

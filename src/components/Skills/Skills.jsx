@@ -7,6 +7,8 @@ import backend from "../../assets/backend.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUp, ArrowDown } from "lucide-react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,8 +87,9 @@ const Skills = () => {
               key={index}
             >
               <div className="relative overflow-hidden rounded-xl w-full h-40 sm:h-48">
-                <img
+                <LazyLoadImage
                   src={card.image}
+                  effect="blur"
                   alt="image Not Found"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
